@@ -1,17 +1,21 @@
-const express = require("express");
 const dotenv = require("dotenv");
-const folerRoutes = require("./src/folder/folder.route");
-require("dotenv").config();
+const express = require("express");
+const connectDB = require("./database/database");
+const folderRoutes = require("./src/folder/folder.route");
+
+dotenv.config();
 
 const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use("/api/folder", folderRoutes);
+
 const PORT = process.env.PORT || 8080;
 
-app.use("/api/folder", folerRoutes);
-
-app.get("/", (req, res) => {
-  res.json({ success: true });
-});
-
-app.listen(PORT, () => {
-  console.log("server listening on", PORT);
+app.listen(PORT, async () => {
+  await connectDB();
+  console.log("Server listening on port", PORT);
 });
