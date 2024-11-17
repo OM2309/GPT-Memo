@@ -1,40 +1,54 @@
+"use client";
+
 import { useState } from "react";
 import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import debounce from "lodash/debounce";
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }: any) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Searching for:", searchTerm);
+  const debouncedSearch = debounce((term: string) => {
+    console.log("Searching for:", term);
+    onSearch(term);
+  }, 500);
+
+  // Handle the change in the input field
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    debouncedSearch(term);
   };
 
   const clearSearch = () => {
     setSearchTerm("");
+    onSearch("");
   };
 
   return (
-    <form onSubmit={handleSearch} className="w-full max-w-md relative">
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+    <form className="w-full max-w-md relative">
+      <div className="relative flex items-center">
+        <Search className="absolute left-3 text-muted-foreground w-4 h-4 pointer-events-none" />
         <Input
           type="text"
           placeholder="Search..."
           className="pl-10 pr-10 w-full"
           value={searchTerm}
-          onChange={(e: any) => setSearchTerm(e.target.value)}
+          onChange={handleInputChange} // Use the handleInputChange function here
           aria-label="Search"
         />
         {searchTerm && (
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="sm"
+            className="absolute right-1 h-7 w-7 px-0 text-muted-foreground hover:text-foreground"
             onClick={clearSearch}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
             aria-label="Clear search"
           >
             <X className="w-4 h-4" />
-          </button>
+          </Button>
         )}
       </div>
     </form>

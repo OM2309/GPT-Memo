@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/";
+const BASE_URL = "http://localhost:5000/api";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -24,7 +24,6 @@ export const postApi = async (endpoint: string, data?: object) => {
     const response = await axiosInstance.post(endpoint, data);
     return response;
   } catch (error) {
-    console.error("Error posting data:", error);
-    throw new Error("Failed to post data");
+    throw error;
   }
 };

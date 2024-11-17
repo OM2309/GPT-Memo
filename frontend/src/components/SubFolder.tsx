@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Folder } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function FolderComponent({ folderData }: any) {
+export default function SubFolder({ SubFolderData }: any) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
@@ -12,13 +12,13 @@ export default function FolderComponent({ folderData }: any) {
 
   return (
     <>
-      {folderData?.data?.data?.map((folder: any, index: number) => (
+      {SubFolderData?.data?.data?.map((SubFolderData: any, index: number) => (
         <div
           key={index}
           className="group relative w-32 h-32 cursor-pointer"
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
-          onClick={() => handleFolderClick(folder.slug)}
+          onClick={() => handleFolderClick(SubFolderData.slug)}
         >
           <div
             className={`absolute inset-0 bg-purple-600 rounded-lg transition-all duration-300 ease-in-out ${
@@ -35,7 +35,7 @@ export default function FolderComponent({ folderData }: any) {
               }`}
             />
             <span className="mt-2 text-xs font-bold text-white text-center break-words w-full">
-              {folder?.folderName}
+              {SubFolderData?.subfolderName}
             </span>
           </div>
           <div

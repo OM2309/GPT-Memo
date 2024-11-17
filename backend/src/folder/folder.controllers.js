@@ -34,7 +34,13 @@ exports.createFolder = async (req, res) => {
 
 exports.getAllFolder = async (req, res) => {
   try {
-    const getAllFolder = await FolderModel.find();
+    const { searchTerm } = req.query;
+    let query = {};
+    if (searchTerm) {
+      query = { folderName: { $regex: searchTerm, $options: "i" } };
+    }
+
+    const getAllFolder = await FolderModel.find(query);
     return sendResponse(
       res,
       200,
