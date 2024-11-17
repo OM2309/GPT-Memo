@@ -1,0 +1,36 @@
+# Node.js dependencies
+/node_modules
+
+# Backend dependencies
+/backend/node_modules
+
+# Frontend dependencies
+/frontend/node_modules
+
+# Build output (for both backend and frontend)
+**/dist
+**/build
+
+# Environment variables
+/.env
+.env.local
+.env.*.local
+
+# If you have environment files inside backend folder
+/backend/.env
+
+# Logs
+npm-debug.log
+yarn-debug.log
+
+# IDE/Editor files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Optional: Ignore lock files if you do not want to track them
+package-lock.json
+yarn.lock
