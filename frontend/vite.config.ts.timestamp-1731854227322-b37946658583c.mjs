@@ -1,0 +1,34 @@
+// vite.config.ts
+import { defineConfig } from "file:///C:/Users/Anurag%20Sharma/OneDrive/Desktop/chatgpt-notes/frontend/node_modules/vite/dist/node/index.js";
+import react from "file:///C:/Users/Anurag%20Sharma/OneDrive/Desktop/chatgpt-notes/frontend/node_modules/@vitejs/plugin-react/dist/index.mjs";
+import { crx } from "file:///C:/Users/Anurag%20Sharma/OneDrive/Desktop/chatgpt-notes/frontend/node_modules/@crxjs/vite-plugin/dist/index.mjs";
+
+// manifest.json
+var manifest_default = {
+  manifest_version: 3,
+  name: "ChatGPT Notes Extension",
+  version: "1.0",
+  description: "Save and manage notes using ChatGPT integration.",
+  permissions: [
+    "activeTab"
+  ],
+  action: {
+    default_popup: "index.html"
+  }
+};
+
+// vite.config.ts
+import path from "path";
+var __vite_injected_original_dirname = "C:\\Users\\Anurag Sharma\\OneDrive\\Desktop\\chatgpt-notes\\frontend";
+var vite_config_default = defineConfig({
+  plugins: [react(), crx({ manifest: manifest_default })],
+  resolve: {
+    alias: {
+      "@": path.resolve(__vite_injected_original_dirname, "./src")
+    }
+  }
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcudHMiLCAibWFuaWZlc3QuanNvbiJdLAogICJzb3VyY2VzQ29udGVudCI6IFsiY29uc3QgX192aXRlX2luamVjdGVkX29yaWdpbmFsX2Rpcm5hbWUgPSBcIkM6XFxcXFVzZXJzXFxcXEFudXJhZyBTaGFybWFcXFxcT25lRHJpdmVcXFxcRGVza3RvcFxcXFxjaGF0Z3B0LW5vdGVzXFxcXGZyb250ZW5kXCI7Y29uc3QgX192aXRlX2luamVjdGVkX29yaWdpbmFsX2ZpbGVuYW1lID0gXCJDOlxcXFxVc2Vyc1xcXFxBbnVyYWcgU2hhcm1hXFxcXE9uZURyaXZlXFxcXERlc2t0b3BcXFxcY2hhdGdwdC1ub3Rlc1xcXFxmcm9udGVuZFxcXFx2aXRlLmNvbmZpZy50c1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9pbXBvcnRfbWV0YV91cmwgPSBcImZpbGU6Ly8vQzovVXNlcnMvQW51cmFnJTIwU2hhcm1hL09uZURyaXZlL0Rlc2t0b3AvY2hhdGdwdC1ub3Rlcy9mcm9udGVuZC92aXRlLmNvbmZpZy50c1wiO2ltcG9ydCB7IGRlZmluZUNvbmZpZyB9IGZyb20gXCJ2aXRlXCI7XG5pbXBvcnQgcmVhY3QgZnJvbSBcIkB2aXRlanMvcGx1Z2luLXJlYWN0XCI7XG5pbXBvcnQgeyBjcnggfSBmcm9tIFwiQGNyeGpzL3ZpdGUtcGx1Z2luXCI7XG5pbXBvcnQgbWFuaWZlc3QgZnJvbSBcIi4vbWFuaWZlc3QuanNvblwiO1xuaW1wb3J0IHBhdGggZnJvbSBcInBhdGhcIjtcblxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcbiAgcGx1Z2luczogW3JlYWN0KCksIGNyeCh7IG1hbmlmZXN0IH0pXSxcbiAgcmVzb2x2ZToge1xuICAgIGFsaWFzOiB7XG4gICAgICBcIkBcIjogcGF0aC5yZXNvbHZlKF9fZGlybmFtZSwgXCIuL3NyY1wiKSxcbiAgICB9LFxuICB9LFxufSk7XG4iLCAie1xyXG4gICAgXCJtYW5pZmVzdF92ZXJzaW9uXCI6IDMsXHJcbiAgICBcIm5hbWVcIjogXCJDaGF0R1BUIE5vdGVzIEV4dGVuc2lvblwiLFxyXG4gICAgXCJ2ZXJzaW9uXCI6IFwiMS4wXCIsXHJcbiAgICBcImRlc2NyaXB0aW9uXCI6IFwiU2F2ZSBhbmQgbWFuYWdlIG5vdGVzIHVzaW5nIENoYXRHUFQgaW50ZWdyYXRpb24uXCIsXHJcbiAgICBcInBlcm1pc3Npb25zXCI6IFtcclxuICAgICAgICBcImFjdGl2ZVRhYlwiXHJcbiAgICBdLFxyXG4gICAgXCJhY3Rpb25cIjoge1xyXG4gICAgICAgIFwiZGVmYXVsdF9wb3B1cFwiOiBcImluZGV4Lmh0bWxcIlxyXG4gICAgfVxyXG59Il0sCiAgIm1hcHBpbmdzIjogIjtBQUE0WCxTQUFTLG9CQUFvQjtBQUN6WixPQUFPLFdBQVc7QUFDbEIsU0FBUyxXQUFXOzs7QUNGcEI7QUFBQSxFQUNJLGtCQUFvQjtBQUFBLEVBQ3BCLE1BQVE7QUFBQSxFQUNSLFNBQVc7QUFBQSxFQUNYLGFBQWU7QUFBQSxFQUNmLGFBQWU7QUFBQSxJQUNYO0FBQUEsRUFDSjtBQUFBLEVBQ0EsUUFBVTtBQUFBLElBQ04sZUFBaUI7QUFBQSxFQUNyQjtBQUNKOzs7QURQQSxPQUFPLFVBQVU7QUFKakIsSUFBTSxtQ0FBbUM7QUFNekMsSUFBTyxzQkFBUSxhQUFhO0FBQUEsRUFDMUIsU0FBUyxDQUFDLE1BQU0sR0FBRyxJQUFJLEVBQUUsMkJBQVMsQ0FBQyxDQUFDO0FBQUEsRUFDcEMsU0FBUztBQUFBLElBQ1AsT0FBTztBQUFBLE1BQ0wsS0FBSyxLQUFLLFFBQVEsa0NBQVcsT0FBTztBQUFBLElBQ3RDO0FBQUEsRUFDRjtBQUNGLENBQUM7IiwKICAibmFtZXMiOiBbXQp9Cg==

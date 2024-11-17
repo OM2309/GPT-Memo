@@ -1,9 +1,10 @@
 const sendResponse = require("../../utils/sendResponse");
-const SubfolderModel = require("./subfolder.model");
+const SubfolderModel = require("./subfolder.model"); // Correctly imported
 const FolderModel = require("../folder/folder.model");
 
 exports.createSubfolder = async (req, res) => {
   try {
+    console.log("Creating", req.body);
     const { subfolderName, folderId } = req.body;
 
     if (!subfolderName || !folderId) {
@@ -14,9 +15,10 @@ exports.createSubfolder = async (req, res) => {
       );
     }
 
+    // Change this line to use SubfolderModel, not Subfolder
     const existingSubfolder = await SubfolderModel.findOne({
       subfolderName,
-      folder: folderId,
+      folderId, // This should be folderId as per your schema
     });
 
     if (existingSubfolder) {
@@ -27,9 +29,10 @@ exports.createSubfolder = async (req, res) => {
       );
     }
 
+    // Create a new subfolder document
     const newSubfolder = new SubfolderModel({
       subfolderName,
-      folder: folderId,
+      folderId,
     });
 
     await newSubfolder.save();

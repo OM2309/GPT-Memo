@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { Folder } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addFolder } from "@/redux/folderSlice";
 
 export default function FolderComponent({ folderData }: any) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleFolderClick = (slug: string) => {
     navigate(`/${slug}`);
@@ -18,7 +22,10 @@ export default function FolderComponent({ folderData }: any) {
           className="group relative w-32 h-32 cursor-pointer"
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
-          onClick={() => handleFolderClick(folder.slug)}
+          onClick={() => {
+            handleFolderClick(folder.slug);
+            dispatch(addFolder(folder));
+          }}
         >
           <div
             className={`absolute inset-0 bg-purple-600 rounded-lg transition-all duration-300 ease-in-out ${

@@ -6,11 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import debounce from "lodash/debounce";
 
-export default function SearchBar({ onSearch }: any) {
+export default function SearchBar({
+  onSearch,
+  placeholderName = "Search Here",
+}: any) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const debouncedSearch = debounce((term: string) => {
-    console.log("Searching for:", term);
     onSearch(term);
   }, 500);
 
@@ -32,7 +34,7 @@ export default function SearchBar({ onSearch }: any) {
         <Search className="absolute left-3 text-muted-foreground w-4 h-4 pointer-events-none" />
         <Input
           type="text"
-          placeholder="Search..."
+          placeholder={placeholderName}
           className="pl-10 pr-10 w-full"
           value={searchTerm}
           onChange={handleInputChange} // Use the handleInputChange function here

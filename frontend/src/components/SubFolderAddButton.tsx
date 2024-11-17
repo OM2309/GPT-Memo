@@ -4,39 +4,44 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
-export default function AddButton({
+export default function SubFolderAddButton({
   refetch,
   buttonName = "Add",
-  apiEndPoint,
-}: any) {
+}: {
+  refetch: () => void;
+  buttonName?: string;
+}) {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   }: any = useForm();
 
+  const item = useSelector((state: any) => state.folder);
+  console.log(item?.data[0]?._id);
+
   const { mutate } = useMutation({
-    mutationFn: (data: { folderName: string }) => postApi(apiEndPoint, data),
+    mutationFn: (data: any) => postApi("/sub-folder/create-sub-folder", data),
     onSuccess: () => {
       toast.success("Folder has been created.");
       refetch();
       reset();
     },
     onError: (error: any) => {
-      console.log("helo", error);
-      if (error?.response?.data?.message) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("An error occurred. Please try again.");
-      }
+      console.error("Mutation error:", error);
+      const message =
+        error?.response?.data?.message ||
+        "An error occurred. Please try again.";
+      toast.error(message);
     },
   });
 
-  // handle the form submission
-  const handleAddClick = (data: { folderName: string }) => {
-    mutate(data);
+  // Handle the form submission
+  const handleAddClick = (data: any) => {
+    mutate({ ...data, folderId: item?.data[0]?._id });
   };
 
   return (
@@ -46,8 +51,8 @@ export default function AddButton({
     >
       <div className="relative w-full flex flex-col justify-start">
         <Input
-          {...register("folderName", {
-            required: "Folder name is required",
+          {...register("subfolderName", {
+            required: "Sub Folder name is required",
             minLength: {
               value: 3,
               message: "Folder name must be at least 3 characters",
@@ -58,10 +63,9 @@ export default function AddButton({
           className="pl-4 pr-10 w-full"
           aria-label="Folder Name"
         />
-
-        {errors.folderName && (
+        {errors.subfolderName && (
           <span className="absolute text-red-500 text-sm mt-2 ml-2 top-full left-0">
-            {errors.folderName.message}
+            {errors.subfolderName.message}
           </span>
         )}
       </div>
@@ -69,8 +73,8 @@ export default function AddButton({
         type="submit"
         size="lg"
         variant="outline"
-        className="h-10 w-28  text-muted-foreground pointer "
-        disabled={!!errors.folderName}
+        className="h-10 w-28 text-muted-foreground pointer"
+        disabled={isSubmitting}
       >
         {buttonName}
       </Button>

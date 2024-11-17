@@ -14,7 +14,6 @@ const Home = () => {
   });
 
   const handleSearch = (newSearchTerm: string) => {
-    console.log("handleSearch", newSearchTerm);
     setSearchTerm(newSearchTerm);
     refetch();
   };
@@ -22,13 +21,17 @@ const Home = () => {
   return (
     <div className="m-4 space-y-4">
       <div>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} placeholderName={"Search Folder"} />
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-2 p-4">
         <FolderComponent folderData={data} />
       </div>
       <div>
-        <AddButton refetch={refetch} />
+        <AddButton
+          refetch={refetch}
+          buttonName="Add Folder"
+          apiEndPoint="/folder/create-folder"
+        />
       </div>
     </div>
   );

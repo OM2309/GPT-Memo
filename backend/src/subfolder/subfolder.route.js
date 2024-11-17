@@ -8,7 +8,7 @@ const {
 } = require("./subfolder.controllers");
 
 router.get("/get-subfolders-by-folder/:slug", getSubFolderByFolder);
-router.post("/create-subfolder", createSubfolder);
+router.post("/create-sub-folder", createSubfolder);
 router.post("/update-subfolder/:subfolderId", updateSubfolder);
 router.post("/delete-subfolder/:subfolderId", deleteSubfolder);
 
