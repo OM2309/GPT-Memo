@@ -7,7 +7,7 @@ export default function SubFolder({ SubFolderData }: any) {
   const navigate = useNavigate();
 
   const handleFolderClick = (slug: string) => {
-    navigate(`/${slug}`);
+    navigate(`${slug}`);
   };
 
   return (

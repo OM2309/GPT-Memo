@@ -10,8 +10,14 @@ export default function FolderComponent({ folderData }: any) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleFolderClick = (slug: string) => {
-    navigate(`/${slug}`);
+  const handleFolderClick = (slug: string, folder: any) => {
+    // Validate slug before navigating
+    if (!slug) {
+      console.error("Slug is undefined. Check folder data:", folder);
+      return;
+    }
+    dispatch(addFolder(folder)); // Save folder details in Redux
+    navigate(`/${slug}`); // Navigate using slug
   };
 
   return (
@@ -22,10 +28,7 @@ export default function FolderComponent({ folderData }: any) {
           className="group relative w-32 h-32 cursor-pointer"
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
-          onClick={() => {
-            handleFolderClick(folder.slug);
-            dispatch(addFolder(folder));
-          }}
+          onClick={() => handleFolderClick(folder.slug, folder)}
         >
           <div
             className={`absolute inset-0 bg-purple-600 rounded-lg transition-all duration-300 ease-in-out ${
@@ -42,7 +45,7 @@ export default function FolderComponent({ folderData }: any) {
               }`}
             />
             <span className="mt-2 text-xs font-bold text-white text-center break-words w-full">
-              {folder?.folderName}
+              {folder?.folderName || "Untitled"}
             </span>
           </div>
           <div

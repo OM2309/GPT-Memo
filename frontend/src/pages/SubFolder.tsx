@@ -7,14 +7,14 @@ import { getApi } from "@/utils/api";
 import SubFolderAddButton from "@/components/SubFolderAddButton";
 
 const SubFolder = () => {
-  const { slug } = useParams();
+  const { folderSlug } = useParams();
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data, refetch } = useQuery({
-    queryKey: ["getSubFolder", slug, searchTerm],
+    queryKey: ["getSubFolder", folderSlug, searchTerm],
     queryFn: () =>
       getApi(
-        `/sub-folder/get-subfolders-by-folder/${slug}?searchTerm=${searchTerm}`
+        `/sub-folder/get-subfolders-by-folder/${folderSlug}?searchTerm=${searchTerm}`
       ),
   });
 
