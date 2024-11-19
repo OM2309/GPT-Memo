@@ -1,5 +1,5 @@
 const Thread = () => {
-  return <div>Thread</div>;
+  return <div>Thread js</div>;
 };
 
 export default Thread;
